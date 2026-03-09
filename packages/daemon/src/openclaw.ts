@@ -251,3 +251,18 @@ export const startOpenClawWatcher = async (): Promise<fs.FSWatcher | null> => {
     return null;
   }
 };
+
+// ---------------------------------------------------------------------------
+// What this file sends to AgentAudit servers (via streamEventToSupabase):
+//   - Parsed OpenClaw log entries at or above OPENCLAW_MIN_LEVEL (default WARN)
+//   - Fields sent: source ("openclaw"), type ("tool_call"), sessionId
+//     ("openclaw-gateway"), timestamp, payload.tool, payload.subsystem,
+//     payload.detail (the log message text), payload.level
+//   - plainEnglish translation and anomaly score
+//
+// What this file never sends:
+//   - Raw log file contents in bulk — only individual parsed log lines
+//   - Lines below the configured minimum log level
+//   - Duplicate lines within a 60-second deduplication window
+//   - In local-only mode, all events are written to disk only
+// ---------------------------------------------------------------------------

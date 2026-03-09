@@ -1,5 +1,6 @@
 import net from "node:net";
 import fs from "node:fs";
+import { isDaemonPaused } from "./pause.js";
 import { scoreAnomaly } from "./anomaly.js";
 import { streamEventToSupabase } from "./supabase.js";
 import { translateEvent } from "./translator.js";
@@ -27,6 +28,10 @@ const enrichEvent = (rawData: string): EnrichedEvent => {
 };
 
 const handleRawMessage = async (rawData: string): Promise<void> => {
+  if (isDaemonPaused()) {
+    console.log("[agentaudit:daemon] paused — dropping event");
+    return;
+  }
   try {
     const enrichedEvent = enrichEvent(rawData);
     await streamEventToSupabase(enrichedEvent);
@@ -59,3 +64,16 @@ export const startSocketServer = async (socketPath = DEFAULT_SOCKET_PATH): Promi
     throw new Error(`[agentaudit:daemon] failed to start socket server: ${message}`);
   }
 };
+
+// ---------------------------------------------------------------------------
+// What this file sends to AgentAudit servers (via streamEventToSupabase):
+//   - Enriched events received from the Claude Code hook (hook.sh)
+//   - Only metadata fields: source, type, sessionId, timestamp, payload
+//     (sanitized), plainEnglish translation, anomalyScore, anomalyReason
+//
+// What this file never sends:
+//   - File contents — the hook only receives metadata from Claude Code
+//   - Command output or stdout/stderr
+//   - Events are dropped entirely when the daemon is paused
+//   - In local-only mode, events are written to disk only (see local-only.ts)
+// ---------------------------------------------------------------------------

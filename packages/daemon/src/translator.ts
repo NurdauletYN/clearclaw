@@ -36,3 +36,8 @@ export const translateEvent = (event: RawHookEvent): string => {
       return `${event.source} triggered ${event.type}.`;
   }
 };
+
+// ---------------------------------------------------------------------------
+// What this file sends to AgentAudit servers: NOTHING — pure translation logic
+// What this file never sends: file contents, command output, or any secrets
+// ---------------------------------------------------------------------------

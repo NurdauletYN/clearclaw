@@ -6,6 +6,7 @@
   "scripts": {
     "build": "pnpm -r build",
     "dev": "pnpm --filter @agentaudit/dashboard dev",
+    "test:daemon": "pnpm --filter @agentaudit/daemon test",
     "typecheck": "pnpm -r typecheck"
   }
 }

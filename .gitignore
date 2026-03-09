@@ -1,6 +1,38 @@
+# Dependencies
 node_modules
-.next
+
+# Build output
 dist
+.next
+coverage
+
+# Environment / secrets — NEVER commit these
 .env
 .env.local
+.env.*.local
+
+# User config (contains Supabase credentials)
+~/.agentaudit/config.json
+
+# Dashboard build
+packages/dashboard/.next
+
+# Logs
 *.log
+npm-debug.log*
+pnpm-debug.log*
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Editor
+.vscode/settings.json
+.idea
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Test artifacts
+/tmp/agentaudit-test*

@@ -7,7 +7,8 @@ export const HookEventTypeSchema = z.enum([
   "command_exec",
   "network_request",
   "session_start",
-  "session_end"
+  "session_end",
+  "heartbeat"
 ]);
 
 export const AgentSourceSchema = z.enum(["claude_code", "openclaw"]);
@@ -30,3 +31,8 @@ export type HookEventType = z.infer<typeof HookEventTypeSchema>;
 export type AgentSource = z.infer<typeof AgentSourceSchema>;
 export type RawHookEvent = z.infer<typeof RawHookEventSchema>;
 export type EnrichedEvent = z.infer<typeof EnrichedEventSchema>;
+
+// ---------------------------------------------------------------------------
+// What this file sends to AgentAudit servers: NOTHING — type definitions only
+// What this file never sends: everything
+// ---------------------------------------------------------------------------

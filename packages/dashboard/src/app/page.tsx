@@ -71,46 +71,14 @@ const steps = [
   { number: "03", title: "Review & act", body: "Browse session history, tweak permission profiles, and get instant alerts when anomalous behavior is detected." },
 ];
 
-const plans = [
-  {
-    name: "Free",
-    price: "$0",
-    period: "forever",
-    description: "For developers exploring AI agent monitoring.",
-    features: [
-      "1 connected device",
-      "Last 100 events retained",
-      "Plain-English event feed",
-      "Basic anomaly scoring",
-    ],
-    missing: [
-      "Anomaly alerts",
-      "Session history",
-      "Multiple devices",
-    ],
-    cta: "Get started",
-    href: "/connect",
-    highlight: false,
-  },
-  {
-    name: "Pro",
-    price: "$9",
-    period: "per month",
-    description: "For teams running AI agents in production.",
-    features: [
-      "Up to 5 connected devices",
-      "Unlimited event history",
-      "Plain-English event feed",
-      "Anomaly scoring & real-time alerts",
-      "Full session history & replay",
-      "Permission profiles",
-      "Priority support",
-    ],
-    missing: [],
-    cta: "Start free trial",
-    href: CHECKOUT_URL,
-    highlight: true,
-  },
+const PRO_FEATURES = [
+  "Up to 5 connected devices",
+  "Unlimited event history",
+  "Plain-English event feed",
+  "Anomaly scoring & real-time alerts",
+  "Full session history & replay",
+  "Permission profiles",
+  "Priority support",
 ];
 
 export default function LandingPage(): JSX.Element {
@@ -237,65 +205,39 @@ export default function LandingPage(): JSX.Element {
       {/* Pricing */}
       <section id="pricing" className="border-t border-slate-800 bg-slate-900/40 py-24">
         <div className="mx-auto max-w-6xl px-6">
-          <h2 className="text-center text-3xl font-bold">Simple, transparent pricing</h2>
+          <h2 className="text-center text-3xl font-bold">One plan. Everything included.</h2>
           <p className="mx-auto mt-4 max-w-md text-center text-slate-400">
-            Start for free. Upgrade when you need more history, devices, or alerts.
+            Full access to every feature from day one. No tiers, no limits hidden behind paywalls.
           </p>
-          <div className="mx-auto mt-14 grid max-w-3xl gap-8 md:grid-cols-2">
-            {plans.map((plan) => (
-              <div
-                key={plan.name}
-                className={`relative flex flex-col rounded-xl border p-8 ${
-                  plan.highlight
-                    ? "border-brand-500 bg-slate-900 ring-1 ring-brand-500/50"
-                    : "border-slate-800 bg-slate-900"
-                }`}
-              >
-                {plan.highlight && (
-                  <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
-                    <span className="rounded-full bg-brand-600 px-3 py-1 text-xs font-semibold text-white">
-                      Most popular
-                    </span>
-                  </div>
-                )}
-                <div className="mb-6">
-                  <h3 className="text-lg font-bold">{plan.name}</h3>
-                  <div className="mt-2 flex items-end gap-1">
-                    <span className="text-4xl font-extrabold">{plan.price}</span>
-                    <span className="mb-1 text-sm text-slate-400">/{plan.period}</span>
-                  </div>
-                  <p className="mt-2 text-sm text-slate-400">{plan.description}</p>
+          <div className="mx-auto mt-14 max-w-sm">
+            <div className="relative flex flex-col rounded-xl border border-brand-500 bg-slate-900 p-8 ring-1 ring-brand-500/50">
+              <div className="mb-6">
+                <h3 className="text-lg font-bold">Pro</h3>
+                <div className="mt-2 flex items-end gap-1">
+                  <span className="text-4xl font-extrabold">$9</span>
+                  <span className="mb-1 text-sm text-slate-400">/month</span>
                 </div>
-                <ul className="mb-8 flex-1 space-y-3 text-sm">
-                  {plan.features.map((feat) => (
-                    <li key={feat} className="flex items-start gap-2">
-                      <svg className="mt-0.5 h-4 w-4 shrink-0 text-emerald-400" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                      </svg>
-                      <span>{feat}</span>
-                    </li>
-                  ))}
-                  {plan.missing.map((feat) => (
-                    <li key={feat} className="flex items-start gap-2 text-slate-600">
-                      <svg className="mt-0.5 h-4 w-4 shrink-0" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                      </svg>
-                      <span>{feat}</span>
-                    </li>
-                  ))}
-                </ul>
-                <Link
-                  href={plan.href}
-                  className={`block rounded-lg py-3 text-center text-sm font-semibold transition-colors ${
-                    plan.highlight
-                      ? "bg-brand-600 hover:bg-brand-500 text-white"
-                      : "border border-slate-700 hover:bg-slate-800"
-                  }`}
-                >
-                  {plan.cta}
-                </Link>
+                <p className="mt-2 text-sm text-slate-400">
+                  For developers and teams running AI agents in production.
+                </p>
               </div>
-            ))}
+              <ul className="mb-8 flex-1 space-y-3 text-sm">
+                {PRO_FEATURES.map((feat) => (
+                  <li key={feat} className="flex items-start gap-2">
+                    <svg className="mt-0.5 h-4 w-4 shrink-0 text-emerald-400" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                    </svg>
+                    <span>{feat}</span>
+                  </li>
+                ))}
+              </ul>
+              <Link
+                href={CHECKOUT_URL}
+                className="block rounded-lg bg-brand-600 py-3 text-center text-sm font-semibold text-white transition-colors hover:bg-brand-500"
+              >
+                Get started — $9/month
+              </Link>
+            </div>
           </div>
         </div>
       </section>

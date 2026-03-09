@@ -32,3 +32,10 @@ export const scoreAnomaly = (event: RawHookEvent): AnomalyResult => {
 
   return { score: 0.05, reason: null };
 };
+
+// ---------------------------------------------------------------------------
+// What this file sends to AgentAudit servers: NOTHING — pure scoring logic
+// What this file never sends: file contents, command output, or any secrets;
+//   only inspects payload.command (command name), payload.path (file path),
+//   and payload.host (hostname) — never their contents
+// ---------------------------------------------------------------------------

@@ -55,7 +55,16 @@ const loadFromFile = (filePath: string): void => {
 export const loadDaemonEnv = (): void => {
   const cwdEnvPath = path.join(process.cwd(), ".env");
   const rootEnvPath = path.resolve(process.cwd(), "..", "..", ".env");
+  // Also load ~/.agentaudit/.env for installed (non-monorepo) deployments
+  const userEnvPath = path.join(process.env.HOME ?? "", ".agentaudit", ".env");
 
   loadFromFile(cwdEnvPath);
   loadFromFile(rootEnvPath);
+  loadFromFile(userEnvPath);
 };
+
+// ---------------------------------------------------------------------------
+// What this file sends to AgentAudit servers: NOTHING — reads env files only
+// What this file never sends: environment variable values are kept in memory
+//   and never transmitted; only used to configure the daemon's runtime
+// ---------------------------------------------------------------------------

@@ -3,19 +3,19 @@ import os from "node:os";
 import path from "node:path";
 import type { EnrichedEvent } from "./types.js";
 
-const CONFIG_DIR = path.join(os.homedir(), ".agentaudit");
+const CONFIG_DIR = path.join(os.homedir(), ".clearclaw");
 const EVENTS_FILE = path.join(CONFIG_DIR, "events.jsonl");
 const CONFIG_FILE = path.join(CONFIG_DIR, "config.json");
 
-type AgentAuditConfig = {
+type ClearClawConfig = {
   localOnly?: boolean;
 };
 
-const loadConfig = (): AgentAuditConfig => {
+const loadConfig = (): ClearClawConfig => {
   try {
     if (fs.existsSync(CONFIG_FILE)) {
       const raw = fs.readFileSync(CONFIG_FILE, "utf-8");
-      return JSON.parse(raw) as AgentAuditConfig;
+      return JSON.parse(raw) as ClearClawConfig;
     }
   } catch {
     // Config is optional — silently ignore parse errors
@@ -28,7 +28,7 @@ const loadConfig = (): AgentAuditConfig => {
  *
  * Priority order:
  *   1. LOCAL_ONLY=true environment variable
- *   2. { "localOnly": true } in ~/.agentaudit/config.json
+ *   2. { "localOnly": true } in ~/.clearclaw/config.json
  *   3. --local-only CLI flag (sets LOCAL_ONLY=true before daemon boots)
  */
 export const isLocalOnlyMode = (): boolean => {
@@ -38,7 +38,7 @@ export const isLocalOnlyMode = (): boolean => {
 };
 
 /**
- * Writes an enriched event to ~/.agentaudit/events.jsonl and prints a
+ * Writes an enriched event to ~/.clearclaw/events.jsonl and prints a
  * human-readable line to stdout.  No data leaves the local machine.
  */
 export const writeEventLocally = (event: EnrichedEvent): void => {
@@ -49,19 +49,19 @@ export const writeEventLocally = (event: EnrichedEvent): void => {
 
     const anomalyFlag = event.anomalyScore >= 0.8 ? "  ⚠  ANOMALY" : "";
     console.log(
-      `[agentaudit:local] ${event.timestamp} | ${event.source} | ${event.plainEnglish}${anomalyFlag}`
+      `[clearclaw:local] ${event.timestamp} | ${event.source} | ${event.plainEnglish}${anomalyFlag}`
     );
     if (event.anomalyReason) {
-      console.log(`[agentaudit:local]   reason: ${event.anomalyReason}`);
+      console.log(`[clearclaw:local]   reason: ${event.anomalyReason}`);
     }
   } catch (error: unknown) {
     const message = error instanceof Error ? error.message : "Unknown write error";
-    console.error(`[agentaudit:daemon] failed to write event locally: ${message}`);
+    console.error(`[clearclaw:daemon] failed to write event locally: ${message}`);
   }
 };
 
 // ---------------------------------------------------------------------------
-// What this file sends to AgentAudit servers: NOTHING
+// What this file sends to ClearClaw servers: NOTHING
 // What this file never sends: all events are written only to the local
-//   filesystem at ~/.agentaudit/events.jsonl
+//   filesystem at ~/.clearclaw/events.jsonl
 // ---------------------------------------------------------------------------

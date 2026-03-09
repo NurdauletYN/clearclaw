@@ -95,7 +95,7 @@ export async function POST(): Promise<NextResponse> {
           updated_at: new Date().toISOString()
         });
         if (!error) {
-          console.log(`[agentaudit:billing] synced subscription ${sub.id} for ${email}`);
+          console.log(`[clearclaw:billing] synced subscription ${sub.id} for ${email}`);
           return NextResponse.json({ subscribed: true });
         }
       }
@@ -121,7 +121,7 @@ export async function POST(): Promise<NextResponse> {
             updated_at: new Date().toISOString()
           });
           if (!error) {
-            console.log(`[agentaudit:billing] synced order ${paidOrder.id} for ${email}`);
+            console.log(`[clearclaw:billing] synced order ${paidOrder.id} for ${email}`);
             return NextResponse.json({ subscribed: true });
           }
         }
@@ -131,7 +131,7 @@ export async function POST(): Promise<NextResponse> {
     return NextResponse.json({ subscribed: false });
   } catch (error: unknown) {
     const message = error instanceof Error ? error.message : "Unknown error";
-    console.error("[agentaudit:billing] sync failed:", message);
+    console.error("[clearclaw:billing] sync failed:", message);
     return NextResponse.json({ subscribed: false, error: message }, { status: 500 });
   }
 }

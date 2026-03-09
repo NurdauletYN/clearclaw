@@ -30,8 +30,8 @@ export const RestoreAccessButton = (): JSX.Element => {
       <div className="space-y-2 rounded-lg border border-slate-800 bg-slate-900/60 px-4 py-3 text-sm text-slate-400">
         <p>
           No completed payment found for this account. If you paid with a different email, contact{" "}
-          <a href="mailto:support@agentaudit.dev" className="text-brand-400 underline">
-            support@agentaudit.dev
+          <a href="mailto:support@clearclaw.dev" className="text-brand-400 underline">
+            support@clearclaw.dev
           </a>
           .
         </p>

@@ -45,7 +45,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
   const { error } = await supabase.auth.exchangeCodeForSession(code);
 
   if (error) {
-    console.error("[agentaudit:auth] exchangeCodeForSession error:", error.message);
+    console.error("[clearclaw:auth] exchangeCodeForSession error:", error.message);
     return NextResponse.redirect(`${origin}/login?error=auth_failed`);
   }
 

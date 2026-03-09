@@ -7,7 +7,7 @@ import type { InstallDetection } from "./types.js";
 
 const execFileAsync = promisify(execFile);
 
-const daemonInstallRoot = path.join(os.homedir(), ".agentaudit");
+const daemonInstallRoot = path.join(os.homedir(), ".clearclaw");
 
 const buildLaunchAgentPlist = (projectRoot: string): string => {
   const daemonScript = path.join(projectRoot, "packages", "daemon", "dist", "index.js");
@@ -17,7 +17,7 @@ const buildLaunchAgentPlist = (projectRoot: string): string => {
 <plist version="1.0">
 <dict>
   <key>Label</key>
-  <string>com.agentaudit.daemon</string>
+  <string>com.clearclaw.daemon</string>
   <key>ProgramArguments</key>
   <array>
     <string>node</string>
@@ -25,7 +25,7 @@ const buildLaunchAgentPlist = (projectRoot: string): string => {
   </array>
   <key>EnvironmentVariables</key>
   <dict>
-    <key>AGENTAUDIT_ENV_PATH</key>
+    <key>CLEARCLAW_ENV_PATH</key>
     <string>${envFile}</string>
   </dict>
   <key>RunAtLoad</key>
@@ -33,9 +33,9 @@ const buildLaunchAgentPlist = (projectRoot: string): string => {
   <key>KeepAlive</key>
   <true/>
   <key>StandardOutPath</key>
-  <string>/tmp/agentaudit-daemon.log</string>
+  <string>/tmp/clearclaw-daemon.log</string>
   <key>StandardErrorPath</key>
-  <string>/tmp/agentaudit-daemon.log</string>
+  <string>/tmp/clearclaw-daemon.log</string>
 </dict>
 </plist>
 `;
@@ -44,7 +44,7 @@ const buildLaunchAgentPlist = (projectRoot: string): string => {
 const buildSystemdUnit = (projectRoot: string): string => {
   const daemonScript = path.join(projectRoot, "packages", "daemon", "dist", "index.js");
   return `[Unit]
-Description=AgentAudit daemon
+Description=ClearClaw daemon
 After=network.target
 
 [Service]
@@ -63,21 +63,21 @@ const loadLaunchAgent = async (plistPath: string): Promise<void> => {
   try {
     await execFileAsync("launchctl", ["unload", plistPath]).catch(() => undefined);
     await execFileAsync("launchctl", ["load", "-w", plistPath]);
-    console.log("[agentaudit:cli] LaunchAgent loaded successfully");
+    console.log("[clearclaw:cli] LaunchAgent loaded successfully");
   } catch (error: unknown) {
     const message = error instanceof Error ? error.message : "Unknown launchctl error";
-    console.warn(`[agentaudit:cli] failed to load LaunchAgent (run manually): launchctl load -w ${plistPath}\n  ${message}`);
+    console.warn(`[clearclaw:cli] failed to load LaunchAgent (run manually): launchctl load -w ${plistPath}\n  ${message}`);
   }
 };
 
 const enableSystemdUnit = async (): Promise<void> => {
   try {
     await execFileAsync("systemctl", ["--user", "daemon-reload"]);
-    await execFileAsync("systemctl", ["--user", "enable", "--now", "agentaudit-daemon.service"]);
-    console.log("[agentaudit:cli] systemd user service enabled and started");
+    await execFileAsync("systemctl", ["--user", "enable", "--now", "clearclaw-daemon.service"]);
+    console.log("[clearclaw:cli] systemd user service enabled and started");
   } catch (error: unknown) {
     const message = error instanceof Error ? error.message : "Unknown systemctl error";
-    console.warn(`[agentaudit:cli] failed to enable systemd service (run manually): systemctl --user enable --now agentaudit-daemon.service\n  ${message}`);
+    console.warn(`[clearclaw:cli] failed to enable systemd service (run manually): systemctl --user enable --now clearclaw-daemon.service\n  ${message}`);
   }
 };
 
@@ -94,7 +94,7 @@ export const installDaemonService = async (detection: InstallDetection): Promise
     if (detection.platform === "darwin") {
       const launchAgentsDir = path.join(os.homedir(), "Library", "LaunchAgents");
       await fs.mkdir(launchAgentsDir, { recursive: true });
-      const plistPath = path.join(launchAgentsDir, "com.agentaudit.daemon.plist");
+      const plistPath = path.join(launchAgentsDir, "com.clearclaw.daemon.plist");
       await fs.writeFile(plistPath, buildLaunchAgentPlist(projectRoot), "utf-8");
       await loadLaunchAgent(plistPath);
       return;
@@ -102,7 +102,7 @@ export const installDaemonService = async (detection: InstallDetection): Promise
 
     const systemdDir = path.join(os.homedir(), ".config", "systemd", "user");
     await fs.mkdir(systemdDir, { recursive: true });
-    const servicePath = path.join(systemdDir, "agentaudit-daemon.service");
+    const servicePath = path.join(systemdDir, "clearclaw-daemon.service");
     await fs.writeFile(servicePath, buildSystemdUnit(projectRoot), "utf-8");
     await enableSystemdUnit();
   } catch (error: unknown) {

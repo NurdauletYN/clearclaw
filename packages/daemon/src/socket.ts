@@ -6,7 +6,7 @@ import { streamEventToSupabase } from "./supabase.js";
 import { translateEvent } from "./translator.js";
 import { EnrichedEventSchema, RawHookEventSchema, type EnrichedEvent } from "./types.js";
 
-const DEFAULT_SOCKET_PATH = "/tmp/agentaudit.sock";
+const DEFAULT_SOCKET_PATH = "/tmp/clearclaw.sock";
 
 const removeExistingSocket = (socketPath: string): void => {
   if (fs.existsSync(socketPath)) {
@@ -29,7 +29,7 @@ const enrichEvent = (rawData: string): EnrichedEvent => {
 
 const handleRawMessage = async (rawData: string): Promise<void> => {
   if (isDaemonPaused()) {
-    console.log("[agentaudit:daemon] paused — dropping event");
+    console.log("[clearclaw:daemon] paused — dropping event");
     return;
   }
   try {
@@ -37,7 +37,7 @@ const handleRawMessage = async (rawData: string): Promise<void> => {
     await streamEventToSupabase(enrichedEvent);
   } catch (error: unknown) {
     const message = error instanceof Error ? error.message : "Unknown socket parse error";
-    console.error(`[agentaudit:daemon] unable to handle socket message: ${message}`);
+    console.error(`[clearclaw:daemon] unable to handle socket message: ${message}`);
   }
 };
 
@@ -61,12 +61,12 @@ export const startSocketServer = async (socketPath = DEFAULT_SOCKET_PATH): Promi
     return server;
   } catch (error: unknown) {
     const message = error instanceof Error ? error.message : "Unknown socket startup error";
-    throw new Error(`[agentaudit:daemon] failed to start socket server: ${message}`);
+    throw new Error(`[clearclaw:daemon] failed to start socket server: ${message}`);
   }
 };
 
 // ---------------------------------------------------------------------------
-// What this file sends to AgentAudit servers (via streamEventToSupabase):
+// What this file sends to ClearClaw servers (via streamEventToSupabase):
 //   - Enriched events received from the Claude Code hook (hook.sh)
 //   - Only metadata fields: source, type, sessionId, timestamp, payload
 //     (sanitized), plainEnglish translation, anomalyScore, anomalyReason

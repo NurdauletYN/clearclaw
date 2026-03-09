@@ -1,4 +1,4 @@
--- AgentAudit: subscriptions table (managed by Lemon Squeezy webhooks)
+-- ClearClaw: subscriptions table (managed by Lemon Squeezy webhooks)
 
 create table if not exists public.subscriptions (
   id          text        primary key,           -- Lemon Squeezy subscription or order ID

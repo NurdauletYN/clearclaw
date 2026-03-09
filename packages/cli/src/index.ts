@@ -6,16 +6,16 @@ import { detectEnvironment } from "./detect.js";
 import { installDaemonService } from "./install-daemon.js";
 import { installClaudeHooks } from "./install-hooks.js";
 
-const CONFIG_DIR = path.join(os.homedir(), ".agentaudit");
+const CONFIG_DIR = path.join(os.homedir(), ".clearclaw");
 
 const writeLocalOnlyConfig = async (): Promise<void> => {
   await fs.mkdir(CONFIG_DIR, { recursive: true });
   const configPath = path.join(CONFIG_DIR, "config.json");
   const config = { localOnly: true };
   await fs.writeFile(configPath, JSON.stringify(config, null, 2) + "\n", "utf-8");
-  console.log(`[agentaudit] Local-only mode enabled — wrote ${configPath}`);
-  console.log("[agentaudit] Events will be stored at ~/.agentaudit/events.jsonl");
-  console.log("[agentaudit] No data will be sent to the cloud.");
+  console.log(`[clearclaw] Local-only mode enabled — wrote ${configPath}`);
+  console.log("[clearclaw] Events will be stored at ~/.clearclaw/events.jsonl");
+  console.log("[clearclaw] No data will be sent to the cloud.");
 };
 
 const runInstall = async (localOnly: boolean): Promise<void> => {
@@ -28,13 +28,13 @@ const runInstall = async (localOnly: boolean): Promise<void> => {
       await writeLocalOnlyConfig();
     }
 
-    console.log("AgentAudit install complete.");
+    console.log("ClearClaw install complete.");
     console.log(`Detected platform: ${detection.platform}`);
     console.log(`Claude settings: ${detection.claudeSettingsPath}`);
     console.log(`OpenClaw logs: ${detection.openClawLogPath}`);
 
     if (!localOnly) {
-      console.log("Make sure SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY are set in ~/.agentaudit/.env");
+      console.log("Make sure SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY are set in ~/.clearclaw/.env");
     }
   } catch (error: unknown) {
     const message = error instanceof Error ? error.message : "Unknown CLI install error";
@@ -51,7 +51,7 @@ const main = async (): Promise<void> => {
 
     if (command !== "install") {
       console.error(`Unknown command: ${command}`);
-      console.error("Usage: npx agentaudit@latest install [--local-only]");
+      console.error("Usage: npx clearclaw@latest install [--local-only]");
       process.exit(1);
     }
 

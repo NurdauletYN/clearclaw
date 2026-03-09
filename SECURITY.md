@@ -2,10 +2,10 @@
 
 ## Reporting a Vulnerability
 
-If you find a security vulnerability in AgentAudit, **please do not open a
+If you find a security vulnerability in ClearClaw, **please do not open a
 public GitHub issue.**
 
-Email: **security@agentaudit.dev**
+Email: **security@clearclaw.dev**
 
 Include:
 - Description of the vulnerability
@@ -18,10 +18,10 @@ within 5 business days.
 
 ---
 
-## What AgentAudit Sends to the Cloud
+## What ClearClaw Sends to the Cloud
 
-AgentAudit connects to a Supabase instance that **you own and control**.
-There is no "AgentAudit central server" receiving your data unless you
+ClearClaw connects to a Supabase instance that **you own and control**.
+There is no "ClearClaw central server" receiving your data unless you
 explicitly configure one.
 
 ### Exact fields sent per event (cloud mode only)
@@ -68,7 +68,7 @@ No user data is included in heartbeats.
 
 ---
 
-## What AgentAudit NEVER Sends
+## What ClearClaw NEVER Sends
 
 - **File contents** — the hook receives file paths, not file contents
 - **Command output** — stdout, stderr, and exit codes are never captured
@@ -118,11 +118,11 @@ before inserting. No other network calls exist in the daemon.
 
 ## Local-Only Mode (No Network Calls)
 
-Set `LOCAL_ONLY=true` or add `{"localOnly": true}` to `~/.agentaudit/config.json`.
+Set `LOCAL_ONLY=true` or add `{"localOnly": true}` to `~/.clearclaw/config.json`.
 
 In local-only mode:
 - All Supabase imports are bypassed
-- Events are written to `~/.agentaudit/events.jsonl`
+- Events are written to `~/.clearclaw/events.jsonl`
 - Events are printed to the terminal
 - The Unix socket server still runs (so hooks still fire)
 - Translation and anomaly detection still run
@@ -132,7 +132,7 @@ Verify with:
 ```bash
 LOCAL_ONLY=true node packages/daemon/dist/index.js &
 # Watch the JSONL file
-tail -f ~/.agentaudit/events.jsonl
+tail -f ~/.clearclaw/events.jsonl
 ```
 
 ---
@@ -144,7 +144,7 @@ tail -f ~/.agentaudit/events.jsonl
 │                   Your Machine                       │
 │                                                      │
 │  Claude Code ──hook.sh──► Unix socket               │
-│                            /tmp/agentaudit.sock      │
+│                            /tmp/clearclaw.sock      │
 │                                │                     │
 │  OpenClaw logs ─fs.watch──►   │                     │
 │  ~/.openclaw/events.log        │                     │
@@ -162,7 +162,7 @@ tail -f ~/.agentaudit/events.jsonl
 │               LOCAL_ONLY=true        cloud mode     │
 │                    │                       │        │
 │                    ▼                       ▼        │
-│           ~/.agentaudit/         YOUR Supabase      │
+│           ~/.clearclaw/         YOUR Supabase      │
 │           events.jsonl           (you own it)       │
 └──────────────────────────────────────────────────── ┘
                                         │
@@ -174,7 +174,7 @@ tail -f ~/.agentaudit/events.jsonl
 **Key properties:**
 - The daemon runs entirely on your machine
 - The Supabase instance belongs to you (you created it, you hold the keys)
-- No data routes through AgentAudit servers
+- No data routes through ClearClaw servers
 - Local-only mode requires zero third-party accounts
 
 ---

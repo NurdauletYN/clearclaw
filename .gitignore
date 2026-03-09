@@ -12,7 +12,7 @@ coverage
 .env.*.local
 
 # User config (contains Supabase credentials)
-~/.agentaudit/config.json
+~/.clearclaw/config.json
 
 # Dashboard build
 packages/dashboard/.next
@@ -35,4 +35,4 @@ pnpm-debug.log*
 *.tsbuildinfo
 
 # Test artifacts
-/tmp/agentaudit-test*
+/tmp/clearclaw-test*

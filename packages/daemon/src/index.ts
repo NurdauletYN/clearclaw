@@ -16,7 +16,7 @@ const bootDaemon = async (): Promise<void> => {
 
     if (isLocalOnlyMode()) {
       console.log(
-        "[agentaudit:daemon] local-only mode — events written to ~/.agentaudit/events.jsonl, no cloud connection"
+        "[clearclaw:daemon] local-only mode — events written to ~/.clearclaw/events.jsonl, no cloud connection"
       );
     }
 
@@ -24,7 +24,7 @@ const bootDaemon = async (): Promise<void> => {
     await startOpenClawWatcher();
     const heartbeatTimer = startHeartbeat();
     const pauseTimer = startPausePoller();
-    console.log("[agentaudit:daemon] running and listening for agent events");
+    console.log("[clearclaw:daemon] running and listening for agent events");
 
     const shutdown = (): void => {
       try {
@@ -41,7 +41,7 @@ const bootDaemon = async (): Promise<void> => {
     process.on("SIGTERM", shutdown);
   } catch (error: unknown) {
     const message = error instanceof Error ? error.message : "Unknown daemon startup error";
-    console.error(`[agentaudit:daemon] startup failed: ${message}`);
+    console.error(`[clearclaw:daemon] startup failed: ${message}`);
     process.exit(1);
   }
 };
@@ -49,7 +49,7 @@ const bootDaemon = async (): Promise<void> => {
 void bootDaemon();
 
 // ---------------------------------------------------------------------------
-// What this file sends to AgentAudit servers: NOTHING directly — orchestrates
+// What this file sends to ClearClaw servers: NOTHING directly — orchestrates
 //   other modules; see supabase.ts for the full data inventory
 //
 // What this file never sends: startup errors, process arguments, or env config

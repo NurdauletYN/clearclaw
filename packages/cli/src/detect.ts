@@ -8,7 +8,7 @@ const PlatformSchema = z.union([z.literal("darwin"), z.literal("linux")]);
 export const detectEnvironment = (): InstallDetection => {
   const platformResult = PlatformSchema.safeParse(os.platform());
   if (!platformResult.success) {
-    throw new Error("AgentAudit currently supports only macOS and Linux.");
+    throw new Error("ClearClaw currently supports only macOS and Linux.");
   }
 
   const platform = platformResult.data as SupportedPlatform;
@@ -18,6 +18,6 @@ export const detectEnvironment = (): InstallDetection => {
     platform,
     claudeSettingsPath: path.join(home, ".claude", "settings.json"),
     openClawLogPath: path.join(home, ".openclaw", "events.log"),
-    daemonSocketPath: "/tmp/agentaudit.sock"
+    daemonSocketPath: "/tmp/clearclaw.sock"
   };
 };

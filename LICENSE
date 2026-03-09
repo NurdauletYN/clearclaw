@@ -2,15 +2,15 @@ Business Source License 1.1
 
 Parameters
 
-Licensor:             AgentAudit
-Licensed Work:        AgentAudit — real-time monitor for AI agent activity
-                      The Licensed Work is (c) 2024 AgentAudit
+Licensor:             ClearClaw
+Licensed Work:        ClearClaw — real-time monitor for AI agent activity
+                      The Licensed Work is (c) 2024 ClearClaw
 Change Date:          Four years from the date the Licensed Work was first
                       publicly distributed under this License.
 Change License:       MIT License
 
 For information about alternative licensing arrangements for the Licensed
-Work, please visit https://agentaudit.dev
+Work, please visit https://clearclaw.dev
 
 Notice
 
@@ -96,8 +96,8 @@ cost and with no time limit.
 You may evaluate the Licensed Work for commercial purposes for up to 30 days.
 
 You MAY NOT use the Licensed Work to offer a competing hosted service that
-provides the same or substantially similar functionality as the AgentAudit
-hosted service at agentaudit.dev.
+provides the same or substantially similar functionality as the ClearClaw
+hosted service at clearclaw.dev.
 
 Production use for commercial purposes requires a commercial license
-available at https://agentaudit.dev
+available at https://clearclaw.dev

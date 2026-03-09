@@ -1,4 +1,4 @@
--- AgentAudit: key-value settings table
+-- ClearClaw: key-value settings table
 
 create table if not exists public.settings (
   key         text        primary key,

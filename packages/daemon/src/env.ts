@@ -48,15 +48,15 @@ const loadFromFile = (filePath: string): void => {
     }
   } catch (error: unknown) {
     const message = error instanceof Error ? error.message : "Unknown env load error";
-    console.error(`[agentaudit:daemon] failed to load env file ${filePath}: ${message}`);
+    console.error(`[clearclaw:daemon] failed to load env file ${filePath}: ${message}`);
   }
 };
 
 export const loadDaemonEnv = (): void => {
   const cwdEnvPath = path.join(process.cwd(), ".env");
   const rootEnvPath = path.resolve(process.cwd(), "..", "..", ".env");
-  // Also load ~/.agentaudit/.env for installed (non-monorepo) deployments
-  const userEnvPath = path.join(process.env.HOME ?? "", ".agentaudit", ".env");
+  // Also load ~/.clearclaw/.env for installed (non-monorepo) deployments
+  const userEnvPath = path.join(process.env.HOME ?? "", ".clearclaw", ".env");
 
   loadFromFile(cwdEnvPath);
   loadFromFile(rootEnvPath);
@@ -64,7 +64,7 @@ export const loadDaemonEnv = (): void => {
 };
 
 // ---------------------------------------------------------------------------
-// What this file sends to AgentAudit servers: NOTHING — reads env files only
+// What this file sends to ClearClaw servers: NOTHING — reads env files only
 // What this file never sends: environment variable values are kept in memory
 //   and never transmitted; only used to configure the daemon's runtime
 // ---------------------------------------------------------------------------

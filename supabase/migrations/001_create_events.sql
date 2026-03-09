@@ -1,4 +1,4 @@
--- AgentAudit: initial schema migration
+-- ClearClaw: initial schema migration
 
 create table if not exists public.events (
   id text primary key,

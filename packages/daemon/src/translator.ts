@@ -38,6 +38,6 @@ export const translateEvent = (event: RawHookEvent): string => {
 };
 
 // ---------------------------------------------------------------------------
-// What this file sends to AgentAudit servers: NOTHING — pure translation logic
+// What this file sends to ClearClaw servers: NOTHING — pure translation logic
 // What this file never sends: file contents, command output, or any secrets
 // ---------------------------------------------------------------------------

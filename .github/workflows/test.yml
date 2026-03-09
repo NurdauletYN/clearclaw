@@ -30,7 +30,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Type-check daemon
-        run: pnpm --filter @agentaudit/daemon typecheck
+        run: pnpm --filter @clearclaw/daemon typecheck
 
       - name: Run daemon unit tests
-        run: pnpm --filter @agentaudit/daemon test
+        run: pnpm --filter @clearclaw/daemon test

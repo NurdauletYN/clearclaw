@@ -1,23 +1,23 @@
-# AgentAudit
+# ClearClaw
 
 **See what your AI agents are actually doing — real-time monitor for Claude Code and OpenClaw.**
 
 ![Dashboard screenshot](docs/screenshot.png)
 
-> AgentAudit is a lightweight daemon that runs on your machine, intercepts every file read, command execution, and network request made by your AI agents, translates each action into plain English, scores it for anomalies, and streams the result to a live web dashboard.
+> ClearClaw is a lightweight daemon that runs on your machine, intercepts every file read, command execution, and network request made by your AI agents, translates each action into plain English, scores it for anomalies, and streams the result to a live web dashboard.
 
 ---
 
 ## Install
 
 ```bash
-npx agentaudit@latest install
+npx clearclaw@latest install
 ```
 
 Or for fully offline / local-only mode (no cloud):
 
 ```bash
-npx agentaudit@latest install --local-only
+npx clearclaw@latest install --local-only
 ```
 
 ---
@@ -66,19 +66,19 @@ See [SECURITY.md](SECURITY.md) for the full data inventory and verification inst
 
 ## Local-only mode
 
-No data leaves your machine. Events are written to `~/.agentaudit/events.jsonl`
+No data leaves your machine. Events are written to `~/.clearclaw/events.jsonl`
 and printed to the terminal.
 
 **Activate at install time:**
 
 ```bash
-npx agentaudit@latest install --local-only
+npx clearclaw@latest install --local-only
 ```
 
 **Activate at any time:**
 
 ```bash
-echo '{"localOnly": true}' > ~/.agentaudit/config.json
+echo '{"localOnly": true}' > ~/.clearclaw/config.json
 ```
 
 **Or via environment variable:**
@@ -109,8 +109,8 @@ LOCAL_ONLY=true node packages/daemon/dist/index.js
 
 ```bash
 # 1. Clone
-git clone https://github.com/yourusername/agentaudit
-cd agentaudit
+git clone https://github.com/yourusername/clearclaw
+cd clearclaw
 
 # 2. Install dependencies
 pnpm install
@@ -147,7 +147,7 @@ pnpm test:daemon
 
 ## Links
 
-- Homepage: [agentaudit.dev](https://agentaudit.dev)
+- Homepage: [clearclaw.dev](https://clearclaw.dev)
 - Security policy: [SECURITY.md](SECURITY.md)
 - Contributing: [CONTRIBUTING.md](CONTRIBUTING.md)
 - License: [Business Source License 1.1](LICENSE) → MIT after 4 years
@@ -158,4 +158,4 @@ pnpm test:daemon
 
 [Business Source License 1.1](LICENSE) — free for personal non-commercial use,
 converts to MIT after 4 years. Commercial use requires a license from
-[agentaudit.dev](https://agentaudit.dev).
+[clearclaw.dev](https://clearclaw.dev).

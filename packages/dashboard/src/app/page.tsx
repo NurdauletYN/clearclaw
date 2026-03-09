@@ -61,13 +61,13 @@ const features = [
     ),
     title: "Zero-config install",
     description:
-      "One command — npx agentaudit install — registers the hook, installs a local daemon, and streams events to your dashboard. No code changes needed.",
+      "One command — npx clearclaw install — registers the hook, installs a local daemon, and streams events to your dashboard. No code changes needed.",
   },
 ];
 
 const steps = [
-  { number: "01", title: "Install the daemon", body: "Run npx agentaudit install on any machine running Claude Code or OpenClaw. The CLI registers a hook and launches a background daemon in under 30 seconds." },
-  { number: "02", title: "Watch in real time", body: "Every agent action — file edits, commands, network calls — is captured, translated, and streamed live to your AgentAudit dashboard." },
+  { number: "01", title: "Install the daemon", body: "Run npx clearclaw install on any machine running Claude Code or OpenClaw. The CLI registers a hook and launches a background daemon in under 30 seconds." },
+  { number: "02", title: "Watch in real time", body: "Every agent action — file edits, commands, network calls — is captured, translated, and streamed live to your ClearClaw dashboard." },
   { number: "03", title: "Review & act", body: "Browse session history, tweak permission profiles, and get instant alerts when anomalous behavior is detected." },
 ];
 
@@ -137,7 +137,7 @@ export default function LandingPage(): JSX.Element {
             <span className="h-3 w-3 rounded-full bg-red-500/70" />
             <span className="h-3 w-3 rounded-full bg-yellow-500/70" />
             <span className="h-3 w-3 rounded-full bg-emerald-500/70" />
-            <span className="ml-3 text-xs text-slate-500">AgentAudit — live feed</span>
+            <span className="ml-3 text-xs text-slate-500">ClearClaw — live feed</span>
           </div>
           <div className="space-y-2 px-4 py-4 font-mono text-xs">
             <div className="flex items-start gap-3">
@@ -165,7 +165,7 @@ export default function LandingPage(): JSX.Element {
         <div className="mx-auto max-w-6xl px-6">
           <h2 className="text-center text-3xl font-bold">Everything you need to trust your AI agents</h2>
           <p className="mx-auto mt-4 max-w-xl text-center text-slate-400">
-            AgentAudit gives you full visibility into what your AI coding agents are doing — without slowing them down.
+            ClearClaw gives you full visibility into what your AI coding agents are doing — without slowing them down.
           </p>
           <div className="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {features.map((f) => (
@@ -196,7 +196,7 @@ export default function LandingPage(): JSX.Element {
           </div>
           <div className="mt-12 flex justify-center">
             <pre className="rounded-lg border border-slate-800 bg-slate-900 px-6 py-3 text-sm text-emerald-400">
-              npx agentaudit install
+              npx clearclaw install
             </pre>
           </div>
         </div>
@@ -247,7 +247,7 @@ export default function LandingPage(): JSX.Element {
         <div className="mx-auto max-w-3xl px-6 text-center">
           <h2 className="text-3xl font-bold">Know what your AI agent is doing — right now</h2>
           <p className="mt-4 text-slate-400">
-            Join developers who use AgentAudit to keep autonomous AI agents accountable.
+            Join developers who use ClearClaw to keep autonomous AI agents accountable.
           </p>
           <Link
             href="/connect"
@@ -262,12 +262,12 @@ export default function LandingPage(): JSX.Element {
       <footer className="border-t border-slate-800 py-8">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-6 text-sm text-slate-500 sm:flex-row">
           <span>
-            &copy; {new Date().getFullYear()} AgentAudit. All rights reserved.
+            &copy; {new Date().getFullYear()} ClearClaw. All rights reserved.
           </span>
           <div className="flex gap-6">
             <Link href="/dashboard" className="hover:text-slate-300 transition-colors">Dashboard</Link>
             <Link href="/connect" className="hover:text-slate-300 transition-colors">Install</Link>
-            <a href="mailto:support@agentaudit.dev" className="hover:text-slate-300 transition-colors">Support</a>
+            <a href="mailto:support@clearclaw.dev" className="hover:text-slate-300 transition-colors">Support</a>
           </div>
         </div>
       </footer>

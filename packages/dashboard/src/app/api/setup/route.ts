@@ -10,7 +10,7 @@ export async function POST(request: Request): Promise<NextResponse> {
     const body = (await request.json()) as unknown;
     const payload = SetupPayloadSchema.parse(body);
 
-    const expectedToken = process.env.AGENTAUDIT_INSTALL_TOKEN ?? "";
+    const expectedToken = process.env.CLEARCLAW_INSTALL_TOKEN ?? "";
     if (!expectedToken || payload.installToken !== expectedToken) {
       return NextResponse.json({ ok: false, error: "Invalid install token" }, { status: 401 });
     }

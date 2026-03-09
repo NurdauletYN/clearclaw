@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-SOCKET_PATH="/tmp/agentaudit.sock"
+SOCKET_PATH="/tmp/clearclaw.sock"
 PAYLOAD="${1:-}"
 
 if [ -z "$PAYLOAD" ]; then

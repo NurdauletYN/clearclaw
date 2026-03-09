@@ -1,12 +1,12 @@
 {
-  "name": "agentaudit",
+  "name": "clearclaw",
   "private": true,
   "version": "0.1.0",
   "packageManager": "pnpm@9.15.0",
   "scripts": {
     "build": "pnpm -r build",
-    "dev": "pnpm --filter @agentaudit/dashboard dev",
-    "test:daemon": "pnpm --filter @agentaudit/daemon test",
+    "dev": "pnpm --filter @clearclaw/dashboard dev",
+    "test:daemon": "pnpm --filter @clearclaw/daemon test",
     "typecheck": "pnpm -r typecheck"
   }
 }

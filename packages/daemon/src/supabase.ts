@@ -154,12 +154,12 @@ export const streamEventToSupabase = async (event: EnrichedEvent): Promise<void>
     });
   } catch (error: unknown) {
     const message = error instanceof Error ? error.message : "Unknown Supabase error";
-    console.error(`[agentaudit:daemon] failed to stream event after retries: ${message}`);
+    console.error(`[clearclaw:daemon] failed to stream event after retries: ${message}`);
   }
 };
 
 // ---------------------------------------------------------------------------
-// What this file sends to AgentAudit servers (Supabase):
+// What this file sends to ClearClaw servers (Supabase):
 //   - event id (random UUID generated locally, not tied to user identity)
 //   - source: "claude_code" or "openclaw"
 //   - type: event type enum (e.g. "file_read", "command_exec")

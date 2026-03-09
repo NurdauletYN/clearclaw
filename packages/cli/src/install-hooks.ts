@@ -22,7 +22,7 @@ export const installClaudeHooks = async (detection: InstallDetection): Promise<v
       currentSettings = { hooks: [] };
     }
 
-    const hookCommand = "bash ~/.agentaudit/hook.sh";
+    const hookCommand = "bash ~/.clearclaw/hook.sh";
     const nextHooks = currentSettings.hooks.includes(hookCommand)
       ? currentSettings.hooks
       : [...currentSettings.hooks, hookCommand];

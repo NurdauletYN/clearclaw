@@ -12,14 +12,14 @@ export const startHeartbeat = (): NodeJS.Timeout => {
         sessionId: "daemon-heartbeat",
         timestamp: new Date().toISOString(),
         payload: { version: "0.1.0" },
-        plainEnglish: "AgentAudit daemon is running.",
+        plainEnglish: "ClearClaw daemon is running.",
         anomalyScore: 0,
         anomalyReason: null
       });
       await streamEventToSupabase(event);
     } catch (error: unknown) {
       const message = error instanceof Error ? error.message : "Unknown heartbeat error";
-      console.error(`[agentaudit:daemon] heartbeat failed: ${message}`);
+      console.error(`[clearclaw:daemon] heartbeat failed: ${message}`);
     }
   };
 
@@ -28,13 +28,13 @@ export const startHeartbeat = (): NodeJS.Timeout => {
 };
 
 // ---------------------------------------------------------------------------
-// What this file sends to AgentAudit servers (via streamEventToSupabase):
+// What this file sends to ClearClaw servers (via streamEventToSupabase):
 //   - source: "claude_code" (constant)
 //   - type: "heartbeat" (constant)
 //   - sessionId: "daemon-heartbeat" (constant)
 //   - timestamp: current ISO-8601 datetime
 //   - payload.version: daemon version string (e.g. "0.1.0")
-//   - plainEnglish: "AgentAudit daemon is running." (constant)
+//   - plainEnglish: "ClearClaw daemon is running." (constant)
 //   - anomalyScore: 0 (constant)
 //
 // What this file never sends:

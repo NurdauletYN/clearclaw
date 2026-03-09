@@ -29,7 +29,7 @@ export default async function SettingsPage(): Promise<JSX.Element> {
       <div>
         <h1 className="text-2xl font-bold">Permission Profiles</h1>
         <p className="mt-1 text-sm text-slate-400">
-          Configure what the AgentAudit daemon watches and blocks. Changes take effect within 5
+          Configure what the ClearClaw daemon watches and blocks. Changes take effect within 5
           seconds.
         </p>
       </div>

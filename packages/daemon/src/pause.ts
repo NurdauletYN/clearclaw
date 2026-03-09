@@ -11,7 +11,7 @@ export const startPausePoller = (): NodeJS.Timeout => {
     const result = await queryPaused();
     if (result !== paused) {
       paused = result;
-      console.log(`[agentaudit:daemon] ${paused ? "paused — events will be dropped" : "resumed — processing events"}`);
+      console.log(`[clearclaw:daemon] ${paused ? "paused — events will be dropped" : "resumed — processing events"}`);
     }
   };
 
@@ -20,7 +20,7 @@ export const startPausePoller = (): NodeJS.Timeout => {
 };
 
 // ---------------------------------------------------------------------------
-// What this file sends to AgentAudit servers: NOTHING — only reads a single
+// What this file sends to ClearClaw servers: NOTHING — only reads a single
 //   boolean value ("daemon_paused") from the Supabase settings table
 //
 // What this file never sends:

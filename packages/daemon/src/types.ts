@@ -33,6 +33,6 @@ export type RawHookEvent = z.infer<typeof RawHookEventSchema>;
 export type EnrichedEvent = z.infer<typeof EnrichedEventSchema>;
 
 // ---------------------------------------------------------------------------
-// What this file sends to AgentAudit servers: NOTHING — type definitions only
+// What this file sends to ClearClaw servers: NOTHING — type definitions only
 // What this file never sends: everything
 // ---------------------------------------------------------------------------

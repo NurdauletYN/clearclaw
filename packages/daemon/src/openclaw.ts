@@ -80,7 +80,7 @@ const resolveOpenClawLogPath = (): string | null => {
     return files.length > 0 ? files[0].fullPath : null;
   } catch (error: unknown) {
     const message = error instanceof Error ? error.message : "Unknown OpenClaw path resolve error";
-    console.error(`[agentaudit:daemon] failed to resolve openclaw log path: ${message}`);
+    console.error(`[clearclaw:daemon] failed to resolve openclaw log path: ${message}`);
     return null;
   }
 };
@@ -196,7 +196,7 @@ const processLine = async (line: string): Promise<void> => {
     await streamEventToSupabase(enriched);
   } catch (error: unknown) {
     const message = error instanceof Error ? error.message : "Unknown OpenClaw parsing error";
-    console.error(`[agentaudit:daemon] openclaw line parse error: ${message}`);
+    console.error(`[clearclaw:daemon] openclaw line parse error: ${message}`);
   }
 };
 
@@ -204,11 +204,11 @@ export const startOpenClawWatcher = async (): Promise<fs.FSWatcher | null> => {
   try {
     const logPath = resolveOpenClawLogPath();
     if (!logPath || !fs.existsSync(logPath)) {
-      console.log("[agentaudit:daemon] openclaw log file not found, skipping watcher");
+      console.log("[clearclaw:daemon] openclaw log file not found, skipping watcher");
       return null;
     }
 
-    console.log(`[agentaudit:daemon] watching openclaw log: ${logPath}`);
+    console.log(`[clearclaw:daemon] watching openclaw log: ${logPath}`);
     let previousSize = fs.statSync(logPath).size;
     let trailingPartialLine = "";
 
@@ -240,20 +240,20 @@ export const startOpenClawWatcher = async (): Promise<fs.FSWatcher | null> => {
         }
       } catch (error: unknown) {
         const message = error instanceof Error ? error.message : "Unknown OpenClaw watch error";
-        console.error(`[agentaudit:daemon] openclaw watch callback failed: ${message}`);
+        console.error(`[clearclaw:daemon] openclaw watch callback failed: ${message}`);
       }
     });
 
     return watcher;
   } catch (error: unknown) {
     const message = error instanceof Error ? error.message : "Unknown OpenClaw watcher error";
-    console.error(`[agentaudit:daemon] failed to start openclaw watcher: ${message}`);
+    console.error(`[clearclaw:daemon] failed to start openclaw watcher: ${message}`);
     return null;
   }
 };
 
 // ---------------------------------------------------------------------------
-// What this file sends to AgentAudit servers (via streamEventToSupabase):
+// What this file sends to ClearClaw servers (via streamEventToSupabase):
 //   - Parsed OpenClaw log entries at or above OPENCLAW_MIN_LEVEL (default WARN)
 //   - Fields sent: source ("openclaw"), type ("tool_call"), sessionId
 //     ("openclaw-gateway"), timestamp, payload.tool, payload.subsystem,

@@ -1,10 +1,10 @@
 {
-  "name": "agentaudit",
+  "name": "clearclaw",
   "version": "0.1.0",
   "private": false,
   "type": "module",
   "bin": {
-    "agentaudit": "dist/index.js"
+    "clearclaw": "dist/index.js"
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

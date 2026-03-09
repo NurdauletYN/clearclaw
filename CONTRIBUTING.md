@@ -1,4 +1,4 @@
-# Contributing to AgentAudit
+# Contributing to ClearClaw
 
 Thanks for your interest in contributing. The most impactful areas are:
 
@@ -13,8 +13,8 @@ Thanks for your interest in contributing. The most impactful areas are:
 ```bash
 # Prerequisites: Node.js >= 20, pnpm >= 9
 
-git clone https://github.com/yourusername/agentaudit
-cd agentaudit
+git clone https://github.com/yourusername/clearclaw
+cd clearclaw
 pnpm install
 
 # Run the unit test suite
@@ -197,7 +197,7 @@ All tests use **Vitest** with Node environment. Tests are in
 ## Project Structure
 
 ```
-agentaudit/
+clearclaw/
 ├── packages/
 │   ├── daemon/          # Node.js daemon (this is the open-source core)
 │   │   └── src/

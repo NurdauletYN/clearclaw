@@ -87,7 +87,7 @@ export default function LandingPage(): JSX.Element {
       {/* Nav */}
       <header className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
         <span className="text-lg font-bold tracking-tight">
-          Agent<span className="text-brand-500">Audit</span>
+          Clear<span className="text-brand-500">Claw</span>
         </span>
         <nav className="flex items-center gap-6 text-sm text-slate-400">
           <a href="#features" className="hover:text-slate-100 transition-colors">Features</a>

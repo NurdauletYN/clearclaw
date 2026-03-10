@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-const CHECKOUT_URL = process.env.NEXT_PUBLIC_LEMON_SQUEEZY_CHECKOUT_URL ?? "#pricing";
+const CHECKOUT_URL = process.env.NEXT_PUBLIC_PAYPAL_PAYMENT_URL ?? "#pricing";
 
 const features = [
   {
@@ -71,14 +71,15 @@ const steps = [
   { number: "03", title: "Review & act", body: "Browse session history, tweak permission profiles, and get instant alerts when anomalous behavior is detected." },
 ];
 
-const PRO_FEATURES = [
-  "Up to 5 connected devices",
+const LIFETIME_FEATURES = [
+  "Unlimited connected devices",
   "Unlimited event history",
   "Plain-English event feed",
   "Anomaly scoring & real-time alerts",
   "Full session history & replay",
   "Permission profiles",
-  "Priority support",
+  "All future features included",
+  "Priority email support",
 ];
 
 export default function LandingPage(): JSX.Element {
@@ -118,18 +119,18 @@ export default function LandingPage(): JSX.Element {
           Monitor every Claude Code and OpenClaw action in plain English, detect anomalies in real time, and review session history — all from one dashboard.
         </p>
         <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-          <Link
-            href="/connect"
-            className="rounded-lg bg-brand-600 px-6 py-3 text-base font-semibold hover:bg-brand-500 transition-colors"
-          >
-            Connect a device — it&apos;s free
-          </Link>
           <a
             href="#pricing"
+            className="rounded-lg bg-brand-600 px-6 py-3 text-base font-semibold hover:bg-brand-500 transition-colors"
+          >
+            Get lifetime access — $49
+          </a>
+          <Link
+            href="/connect"
             className="rounded-lg border border-slate-700 px-6 py-3 text-base font-semibold hover:bg-slate-900 transition-colors"
           >
-            See pricing
-          </a>
+            Connect a device
+          </Link>
         </div>
         {/* Terminal preview */}
         <div className="mx-auto mt-16 max-w-2xl rounded-xl border border-slate-800 bg-slate-900 text-left shadow-2xl">
@@ -205,24 +206,26 @@ export default function LandingPage(): JSX.Element {
       {/* Pricing */}
       <section id="pricing" className="border-t border-slate-800 bg-slate-900/40 py-24">
         <div className="mx-auto max-w-6xl px-6">
-          <h2 className="text-center text-3xl font-bold">One plan. Everything included.</h2>
+          <h2 className="text-center text-3xl font-bold">One payment. Lifetime access.</h2>
           <p className="mx-auto mt-4 max-w-md text-center text-slate-400">
-            Full access to every feature from day one. No tiers, no limits hidden behind paywalls.
+            Pay once, use forever. No subscriptions, no monthly fees, no features hidden behind tiers.
           </p>
           <div className="mx-auto mt-14 max-w-sm">
             <div className="relative flex flex-col rounded-xl border border-brand-500 bg-slate-900 p-8 ring-1 ring-brand-500/50">
               <div className="mb-6">
-                <h3 className="text-lg font-bold">Pro</h3>
-                <div className="mt-2 flex items-end gap-1">
-                  <span className="text-4xl font-extrabold">$9</span>
-                  <span className="mb-1 text-sm text-slate-400">/month</span>
+                <div className="mb-2 inline-block rounded-full bg-brand-600/20 px-2.5 py-0.5 text-xs font-semibold text-brand-400">
+                  Lifetime — early access price
+                </div>
+                <div className="flex items-end gap-2">
+                  <span className="text-5xl font-extrabold">$49</span>
+                  <span className="mb-1 text-sm text-slate-400">one time</span>
                 </div>
                 <p className="mt-2 text-sm text-slate-400">
-                  For developers and teams running AI agents in production.
+                  Pay once, keep access forever. All future features included.
                 </p>
               </div>
               <ul className="mb-8 flex-1 space-y-3 text-sm">
-                {PRO_FEATURES.map((feat) => (
+                {LIFETIME_FEATURES.map((feat) => (
                   <li key={feat} className="flex items-start gap-2">
                     <svg className="mt-0.5 h-4 w-4 shrink-0 text-emerald-400" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
@@ -233,10 +236,13 @@ export default function LandingPage(): JSX.Element {
               </ul>
               <Link
                 href={CHECKOUT_URL}
-                className="block rounded-lg bg-brand-600 py-3 text-center text-sm font-semibold text-white transition-colors hover:bg-brand-500"
+                className="block rounded-lg bg-[#0070ba] py-3 text-center text-sm font-semibold text-white transition-colors hover:bg-[#005ea6]"
               >
-                Get started — $9/month
+                Get lifetime access — $49
               </Link>
+              <p className="mt-3 text-center text-xs text-slate-600">
+                Secure payment via PayPal
+              </p>
             </div>
           </div>
         </div>

@@ -1,10 +1,10 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { getSupabaseAuthBrowserClient } from "../../../lib/supabase-auth";
 
-export default function AuthConfirmPage(): JSX.Element {
+function AuthConfirmInner(): JSX.Element {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
@@ -65,5 +65,20 @@ export default function AuthConfirmPage(): JSX.Element {
       <div className="mx-auto h-8 w-8 animate-spin rounded-full border-2 border-slate-700 border-t-brand-500" />
       <p className="text-sm text-slate-400">Signing you in…</p>
     </div>
+  );
+}
+
+export default function AuthConfirmPage(): JSX.Element {
+  return (
+    <Suspense
+      fallback={
+        <div className="w-full max-w-sm space-y-4 text-center">
+          <div className="mx-auto h-8 w-8 animate-spin rounded-full border-2 border-slate-700 border-t-brand-500" />
+          <p className="text-sm text-slate-400">Loading…</p>
+        </div>
+      }
+    >
+      <AuthConfirmInner />
+    </Suspense>
   );
 }

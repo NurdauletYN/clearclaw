@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-const CHECKOUT_URL = process.env.NEXT_PUBLIC_PAYPAL_PAYMENT_URL ?? "#pricing";
+const CHECKOUT_URL = "/billing";
 
 const features = [
   {

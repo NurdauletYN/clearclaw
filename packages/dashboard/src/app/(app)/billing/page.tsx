@@ -1,36 +1,8 @@
 import Link from "next/link";
 import { PaymentConfirm } from "../../../components/PaymentConfirm";
+import { PayPalButton } from "../../../components/PayPalButton";
 import { getSupabaseAuthServerClient } from "../../../lib/supabase-auth-server";
 import { getSupabaseServerClient, type SubscriptionRow } from "../../../lib/supabase-server";
-
-const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000";
-const PAYPAL_BASE_URL = process.env.NEXT_PUBLIC_PAYPAL_PAYMENT_URL ?? "#";
-
-/**
- * Builds a PayPal checkout URL.
- *
- * If the env var is a standard PayPal CGI "Buy Now" link
- * (https://www.paypal.com/cgi-bin/webscr?...) we append the return and
- * cancel_return parameters so the user lands back on our site after paying.
- *
- * If it's a paypal.me link we return it as-is — PayPal.me does not support
- * custom return URLs, so the user must click "Claim my access" manually when
- * they return to the billing page.
- */
-const buildPayPalUrl = (): string => {
-  if (PAYPAL_BASE_URL === "#") return "#";
-  try {
-    const url = new URL(PAYPAL_BASE_URL);
-    if (url.hostname === "www.paypal.com" && url.pathname.includes("webscr")) {
-      url.searchParams.set("return", `${APP_URL}/billing?payment=success`);
-      url.searchParams.set("cancel_return", `${APP_URL}/billing`);
-      url.searchParams.set("rm", "1"); // POST data on return
-    }
-    return url.toString();
-  } catch {
-    return PAYPAL_BASE_URL;
-  }
-};
 
 const formatDate = (iso: string | null): string => {
   if (!iso) return "—";
@@ -124,7 +96,6 @@ export default async function BillingPage({ searchParams }: BillingPageProps): P
 
   const isActive = subscription?.status === "active" || subscription?.status === "paused";
   const isPending = subscription?.status === "pending";
-  const paypalUrl = buildPayPalUrl();
 
   return (
     <div className="max-w-2xl space-y-8">
@@ -239,12 +210,8 @@ export default async function BillingPage({ searchParams }: BillingPageProps): P
             ))}
           </ul>
 
-          <Link
-            href={paypalUrl}
-            className="block rounded-lg bg-[#0070ba] py-3 text-center text-sm font-semibold text-white transition-colors hover:bg-[#005ea6]"
-          >
-            Pay $49 with PayPal
-          </Link>
+          {/* PayPal hosted button — renders the official PayPal checkout button */}
+          <PayPalButton />
 
           {userEmail && (
             <p className="mt-3 text-center text-xs text-slate-600">
